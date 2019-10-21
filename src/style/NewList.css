@@ -1,0 +1,11 @@
+.newsListShadow{
+    -webkit-box-shadow: 6px 7px 2px -1px rgba(0,0,0,0.19);
+    -moz-box-shadow: 6px 7px 2px -1px rgba(0,0,0,0.19);
+    box-shadow: 6px 7px 2px -1px rgba(0,0,0,0.19);
+
+}
+.buttonShadow{
+    -webkit-box-shadow: 6px 7px 2px -4px rgba(0,0,0,0.19);
+-moz-box-shadow: 6px 7px 2px -4px rgba(0,0,0,0.19);
+box-shadow: 6px 7px 2px -4px rgba(0,0,0,0.19);
+}

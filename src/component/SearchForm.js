@@ -2,6 +2,7 @@ import React from'react';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
 import NewList from './NewList';
+import '../style/NewList.css'
 const SearchForm =()=>{
     const KEY= 'gMMYJjqghQ0KjohYefgicK0XVgL7ySsL';
     const [month,setMonth]= useState(new Date().getMonth()+1); 
@@ -38,9 +39,9 @@ const SearchForm =()=>{
       },[month,year])
     
     return(
-            <div>
-                <div className=' form-inline d-flex justify-content-center bg-light mt-2 rounded-left rounded-right' >
-                    <label className='mr-2'><h4 className='titles'>Select month and year</h4></label>
+            <div className='row justify-content-md-center mt-4 '> 
+                <div className=' form-inline col-md-auto bg-light buttonShadow p-2 rounded-left rounded-right' >
+                    <label className='mr-2'><h4 className='titles' style={{fontStyle:'bold'}}>Select month and year</h4></label>
                     <form onChange={handleMonthSubmit} onSubmit={(e)=>e.preventDefault()}>
                         <select  title ='month'className="custom-select my-1 mr-sm-2 " id="monthselect">
                             <option defaultValue>{month}</option>
