@@ -1,6 +1,6 @@
 import React from 'react';
 import '../style/NewList.css';
-const NewList = ({resource}) =>{
+const NewList = ({resource,isLoading}) =>{
     const nytUrl= 'https://www.nytimes.com/';
     const renderList =(resource)=>{
             resource.map( (idx)=>{
@@ -25,21 +25,21 @@ const NewList = ({resource}) =>{
             }   
         })
     };
-    const test=()=>{
-       const text = 'text test';
-        return <div>{text}</div>
-    }
+    
+
     return(
+        <div>
+            {isLoading? 
         <div className ='card-columns mt-4'>
             {resource.map( (idx)=>{
             if(idx.multimedia.length>0){// check for emty multimedia array to prevent underfine
-                const img =  idx.multimedia[1].url;
+                const img =  idx.multimedia[2].url;
                 const publishDate= new Date(idx.pub_date);
                 const formatted_date = publishDate.getFullYear() + "-" + (publishDate.getMonth() + 1) + "-" + publishDate.getDate();
 
              return(
                 
-                <div key={idx._id} className='card bg-light border-light  rounded newsListShadow' style={{width:'100%'}}>
+                <div key={idx._id} className='card bg-light border-light  rounded newsListShadow mb-3' >
                     <img  className="card-img-top  rounded"  src={`${nytUrl}${img}`} alt={idx.headline.main}/>
                     <div className='card-body'>
                         <h5 className='title'>{idx.headline.main}</h5>
@@ -58,6 +58,15 @@ const NewList = ({resource}) =>{
             }
             })
             }
+        </div>
+        :
+        <div className='d-flex justify-content-center mt-5 '>
+                
+                <img src='https://loading.io/spinners/azure/lg.azure-round-loader.gif'/>
+            
+        </div> 
+        
+        }
         </div>
     )
 }

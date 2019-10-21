@@ -7,17 +7,20 @@ const SearchForm =()=>{
     const KEY= 'gMMYJjqghQ0KjohYefgicK0XVgL7ySsL';
     const [month,setMonth]= useState(new Date().getMonth()+1); 
     const [year,setYear]= useState(new Date().getFullYear()); 
-    const [resource,setResource] = useState([])
+    const [resource,setResource] = useState([]);
+    const [loading,setLoading] = useState(false);
     const handleMonthSubmit=(e)=>{
         e.preventDefault();
         console.log(e.target.value);
         setMonth(e.target.value);
+        setLoading(false); //to show loading while fetch new data
     }
 
     const handleYearSubmit=(e)=>{
         e.preventDefault();
         console.log(e.target.value);
         setYear(e.target.value);
+        setLoading(false);
     }
     let yearArr = [];
     const currentYear = new Date().getFullYear();
@@ -34,11 +37,13 @@ const SearchForm =()=>{
             const responce =  await axios.get(`https://api.nytimes.com/svc/archive/v1/${year}/${month}.json?api-key=${KEY}`);            
             setResource(responce.data.response.docs.splice(0,10));// slice api response lists to 10 lists
             console.log(resource);
+            setLoading(true);
             } 
         fetchData();
       },[month,year])
     
     return(
+            <div>
             <div className='row justify-content-md-center mt-4 '> 
                 <div className=' form-inline col-md-auto bg-light buttonShadow p-2 rounded-left rounded-right' >
                     <label className='mr-2'><h4 className='titles' style={{fontStyle:'bold'}}>Select month and year</h4></label>
@@ -64,10 +69,11 @@ const SearchForm =()=>{
                         <option defaultValue="selected" key={currentYear} value={currentYear}>{currentYear}</option>
                         {yearArr.map((idx)=><option  key={idx}value={idx}>{idx}</option>)}
                     </select>
-                    <button className='btn btn-primary' type='submit' >Filter</button>
+                   {/*} <button className='btn btn-primary' type='submit' >Filter</button>*/}
                    </form>
                   </div>
-                <NewList resource={resource}/>
+                </div>
+                <NewList resource={resource} isLoading={loading}/>
                 </div>
                  
         
