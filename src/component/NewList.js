@@ -2,7 +2,10 @@ import React from 'react';
 import '../style/NewList.css';
 const NewList = ({resource,isLoading}) =>{
     const nytUrl= 'https://www.nytimes.com/';
-    const renderList =(resource)=>{
+    const loaderImg1 = 'https://miro.medium.com/max/742/0*b5dmvyf1uHAeNvvm.gif';
+    const loaderImg2 = 'https://loading.io/spinners/azure/lg.azure-round-loader.gif';
+    const loaderImg3 = 'https://file.mockplus.com/image/2018/04/d938fa8c-09d3-4093-8145-7bb890cf8a76.gif'
+    /*const renderList =(resource)=>{
             resource.map( (idx)=>{
             if(idx.multimedia.length>0){// check for emty multimedia array to prevent underfine
                 const img =  idx.multimedia[3].url;
@@ -24,7 +27,7 @@ const NewList = ({resource,isLoading}) =>{
                 return <h1>Data not support</h1>;
             }   
         })
-    };
+    };*/
     
 
     return(
@@ -32,7 +35,7 @@ const NewList = ({resource,isLoading}) =>{
             {isLoading? 
         <div className ='card-columns mt-4'>
             {resource.map( (idx)=>{
-            if(idx.multimedia.length>0){// check for emty multimedia array to prevent underfine
+            if(idx.multimedia.length>1){// check for emty multimedia array to prevent underfine
                 const img =  idx.multimedia[2].url;
                 const publishDate= new Date(idx.pub_date);
                 const formatted_date = publishDate.getFullYear() + "-" + (publishDate.getMonth() + 1) + "-" + publishDate.getDate();
@@ -40,13 +43,13 @@ const NewList = ({resource,isLoading}) =>{
              return(
                 
                 <div key={idx._id} className='card bg-light border-light  rounded newsListShadow mb-3' >
-                    <img  className="card-img-top  rounded"  src={`${nytUrl}${img}`} alt={idx.headline.main}/>
+                    <a href={idx.web_url} target='_blank'><img  className="card-img-top  rounded"  src={`${nytUrl}${img}`} alt={idx.headline.main}/></a>
                     <div className='card-body'>
                         <h5 className='title'>{idx.headline.main}</h5>
                         <p className='card-text'>{idx.abstract}</p>
                         <footer className="blockquote-footer">
                             <small className="text-muted">
-                            <cite title="Source Title">{idx.byline.original}</cite>
+                            <cite title="Source Title">{idx.byline.original!==null ? idx.byline.original:'No author'}</cite>
                             </small>
                         </footer>
                         <p className="card-text"><small class="text-muted">Last updated {formatted_date}</small></p>
@@ -60,10 +63,8 @@ const NewList = ({resource,isLoading}) =>{
             }
         </div>
         :
-        <div className='d-flex justify-content-center mt-5 '>
-                
-                <img src='https://loading.io/spinners/azure/lg.azure-round-loader.gif'/>
-            
+        <div className='d-flex justify-content-center mt-5 '> 
+               <img src={loaderImg3}/>       
         </div> 
         
         }

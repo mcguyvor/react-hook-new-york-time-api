@@ -35,7 +35,10 @@ const SearchForm =()=>{
     useEffect(()=>{
         async function fetchData(){
             const responce =  await axios.get(`https://api.nytimes.com/svc/archive/v1/${year}/${month}.json?api-key=${KEY}`);            
-            setResource(responce.data.response.docs.splice(0,10));// slice api response lists to 10 lists
+            //setResource(responce.data.response.docs.splice(0,10));// slice api response lists to 10 lists for older news
+            const newsList = responce.data.response.docs;
+            console.log(newsList.splice(newsList.length-20,newsList.length));
+            setResource(newsList.splice(newsList.length-20,newsList.length)); // for newest news
             console.log(resource);
             setLoading(true);
             } 

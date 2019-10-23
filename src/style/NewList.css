@@ -9,3 +9,6 @@
 -moz-box-shadow: 6px 7px 2px -4px rgba(0,0,0,0.19);
 box-shadow: 6px 7px 2px -4px rgba(0,0,0,0.19);
 }
+.textShadow{
+    text-shadow: 4px 2px 3px #000000;
+}
